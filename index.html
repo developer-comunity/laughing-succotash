@@ -1,0 +1,301 @@
+<?php 
+require_once 'session_valid.php';
+require_once 'banner.php' 
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Turismo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <script src="bootstrap/js/jquery.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  
+
+
+
+
+
+  </style>
+ 
+  <!--Carousel -->
+  <style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+  </style>
+  <script type="text/javascript">
+function aContra()
+{
+  $('#mContra').modal('toggle');
+  $('#mContra').modal('show');
+}
+
+</script>
+
+  </script>
+
+<script>
+function guardar(){
+var NomVis = $('#Nombre').val();
+var ContraVis = $('#Contrasena').val();
+var CorreoVis = $('#Correo').val();
+var LugarVis = $('#Lugar').val();
+var EdadVis = $('#Edad').val();
+alert(NomVis+ContraVis+CorreoVis+LugarVis+EdadVis);
+$.post("save_visitante.php",
+  {Nombre:NomVis, Contrasena:ContraVis, Correo:CorreoVis, Lugar:LugarVis, Edad:EdadVis},
+  function(data){
+    $("#reporte").html(data);
+    $("#Nombre").val("");
+    $("#Contrasena").modal('toggle');
+    $("#Correo").val("");
+    $("#Lugar").val("");
+    $("#Edad").val("");
+   
+  });
+
+}
+
+
+
+
+</script>
+
+
+
+
+
+
+  
+
+</head>
+<body>
+  
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="">Home</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Interes
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="municipios2.html">Municipios</a></li>
+          <li><a href="lugar2.html">Lugares Turisticos</a></li>
+          <li><a href="hoteles.html">Hoteles</a></li> 
+        </ul>
+      </li>
+      <li><a href="eventos.html">Eventos</a></li> 
+      <li><a href="http://mty.rutadirecta.com/">Rutas</a></li>
+       
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+       <li><a class="" href="#" onclick="aContra()"><span class="glyphicon glyphicon-user"></span> Registrate</a></li>
+      </fieldset>
+                </form>
+                                                                            <!-- Modal activar-->
+                <div id="mContra" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                   <!-- Modal content-->
+               <div class="modal-content">
+               <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Registrate</h4>
+                </div>
+                  <div class="modal-body">
+                                                          
+                  <form action="" method="POST" name="registrar">
+                  <div class="form-group">
+                <label for="Nombre">Nombre:</label><input type="text" id="Nombre" name="Nombre" class="form-control" placeholder="Nombre" required ="autofocus"/>
+                  </div>
+                  <div class="form-group">
+                  <label for="Contrasena">Contraseña:</label><input type="password" id="Contrasena" name="Contrasena" class="form-control" placeholder="Contraseña" required/>
+                  </div>
+                  <div class="form-group">
+                   <label for="Correo">Correo:</label><input type="email" id="Correo" name="Correo" class="form-control" placeholder="Correo" required/>
+                  </div>
+                  <div class="form-group">
+                 <label for="Lugar">Lugar:</label><input type="text" id="Lugar" name="Lugar" class="form-control" placeholder="Ecribe donde vives" required/>
+                  </div>
+                          <div class="form-group">
+                          <label for="Edad">Edad:</label><input type="number" id="Edad" name="Edad" class="form-control" placeholder="Cuantos años tienes" required/>
+                                </div>
+                                                               
+                          <div class="form-group">
+                          <button class='btn btn-success' onclick="guardar()" id="btnguardar">Registrar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Modal activar-->
+      <li class="dropdown">
+          <a href="#" class="glyphicon glyphicon-log-in dropdown-toggle" data-toggle="dropdown"><b> Login</b> <span class="caret"></span></a>
+      <ul id="login-dp" class="dropdown-menu">
+        <li>
+           <div class="row">
+              <div class="col-md-12">
+               
+                             
+                 <form class="form" role="form" method="post" action="loginvalidate.php" accept-charset="UTF-8" id="login-nav">
+                    <div class="form-group">
+                       <label class="sr-only" for="tEmail">Email address</label>
+                       <input type="email" class="form-control" name="tEmail" id="tEmail" placeholder="Email address" required>
+                    </div>
+                    <div class="form-group">
+                       <label class="sr-only" for="tPassword">Password</label>
+                       <input type="password" class="form-control" name="tPassword" id="tPassword" placeholder="Password" required>
+                                             
+                    </div>
+                    <div class="form-group">
+                       <button type="submit" class="btn btn-primary btn-block">Iniciar Sesion</button>
+                         
+                    </div>
+                    <div class="checkbox">
+                       
+                    </div>
+                 </form>
+              </div>
+              <div class="bottom text-center">
+               
+              </div>
+           </div>
+        </li>
+      </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+    </ul>
+
+  </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        
+        
+        
+</nav>
+  
+
+<style type="text/css">
+body{
+  background-color: #7FFFD4;
+}
+</style>
+
+
+
+<br/>
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 ">
+
+      <img src="imagen/logo2.png">
+    </div>
+
+
+    <!--carousel -->
+    <div class="col-sm-8 text-left"> 
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
+    
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="imagen/ca.jpg" alt="Cola de Caballo">
+    </div>
+
+    <div class="item">
+      <img src="imagen/o.jpg" alt="Parque Fundidora">
+    </div>
+
+    <div class="item">
+      <img src="imagen/santa.jpg" alt="Santa Lucia">
+    </div>
+    <div class="item">
+      <img src="imagen/gru.jpg" alt="Grutas">
+    </div>
+
+    
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<!--Fin carousel  -->
+
+
+      <h3><center>Nuevo León</center></h3>
+      <p>La variedad de propuestas para el viajero en Nuevo León combina facetas muy variadas: naturaleza y modernidad, tradición y aventura, gastronomía y ambiente cosmopolita. La visita obligada es su capital, Monterrey, donde la modernidad y la historia confluyen en un mismo espacio: la Macroplaza. Aquí, la Catedral Metropolitana –que data del siglo XVIII– contrasta con el Faro de Comercio –cuyo famoso láser verde se puede ver desde muchos puntos de la ciudad–. El paseo Santa Lucía, un canal de agua de dos kilómetros de longitud, es la vía que conecta el Museo de Historia Mexicana y el Museo del Noroeste, ambos recintos situados en la Macroplaza, con el Parque Fundidora.</p>
+    </div>
+    <div class="col-sm-2 ">
+      <div class="well">
+        <p>Turismo NL</p>
+        <video src="video/turismo.mp4" type="video/mp4" aling="right" controls width="170" height="160"/>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

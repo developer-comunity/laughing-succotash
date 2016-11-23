@@ -1,0 +1,226 @@
+<?php 
+require_once 'session_valid.php';
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Municipios</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/jquery.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <style>
+ /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
+
+  <!-- pop up-->
+<script language="JavaScript" type="text/javascript">
+<!--//BEGIN Script
+
+function new_window(url) {
+
+link = window.open(url,"Link","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=430,height=300,left=80,top=180");
+
+}
+//END Script-->
+function aContra()
+{
+  $('#mContra').modal('toggle');
+  $('#mContra').modal('show');
+}
+</script>
+</script>
+
+
+
+<script>
+function guardar(){
+var NomVis = $('#Nombre').val();
+var ContraVis = $('#Contrasena').val();
+var CorreoVis = $('#Correo').val();
+var LugarVis = $('#Lugar').val();
+var EdadVis = $('#Edad').val();
+alert(NomVis+ContraVis+CorreoVis+LugarVis+EdadVis);
+$.post("save_visitante.php",
+  {Nombre:NomVis, Contrasena:ContraVis, Correo:CorreoVis, Lugar:LugarVis, Edad:EdadVis},
+  function(data){
+    $("#reporte").html(data);
+    $("#Nombre").val("");
+    $("#Contrasena").modal('toggle');
+    $("#Correo").val("");
+    $("#Lugar").val("");
+    $("#Edad").val("");
+   
+  });
+
+}
+
+
+
+
+
+</script>
+<style type="text/css">
+body{
+  background-color: #7FFFD4;
+}
+</style>
+
+
+  </style>
+</head>
+<body>
+
+
+<body>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      
+    </div>
+    <ul class="nav navbar-nav">
+     <li class="active"><a href="visitante.html">Home</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Interes
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="municipiosvis.html">Municipios</a></li>
+          <li><a href="lugarvis.html">Lugares Turisticos</a></li>
+          <li><a href="hotelesvis.html">Hoteles</a></li> 
+        </ul>
+      </li>
+      <li><a href="eventosvis.html">Eventos</a></li>
+      <li><a href="cuponesvis.html">Cupones</a></li>  
+      <li><a href="http://mty.rutadirecta.com/">Rutas</a></li> 
+      
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+       
+      
+
+       <li class="dropdown">
+          <a href="#" class="glyphicon glyphicon-cog dropdown-toggle" data-toggle="dropdown"><b></b> <span class="caret"></span></a>
+      <ul id="login-dp" class="dropdown-menu">
+        <li>
+           <div class="row">
+              <div class="col-md-12">
+               
+                             
+       <form class="form" role="form" method="post" accept-charset="UTF-8" id="login-nav">
+                    
+                    <div class="form-group">
+                       <a href="salir.php" class="btn btn-default btn-block">Cerrar Sesion</a>
+                    </div>
+                    <div class="checkbox">
+                       
+                    </div>
+                 </form>     </div>
+              <div class="bottom text-center">
+               
+              </div>
+           </div>
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+    </ul>
+
+  </div>
+      
+      <ul class="nav navbar-nav">
+        
+        
+        
+</nav>
+        
+        
+        
+</nav>
+
+<!-- Container (Portfolio Section) -->
+<div class="container-fluid text-center bg-grey">
+  <h1 class="text-success" style="font-family: fantasy">Municipios</h2><br>
+  <h2 class="text-primary" style="font-family: fantasy">Conocelos</h4>
+  <div class="row text-center">
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="imagen/monterrey.jpg" alt="" width="400" height="300">
+        <a href="javascript:new_window('monterrey.html')" aling="up"><p><strong>Monterrey</strong></p></a>
+        
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="imagen/san_pedro2.jpg" alt="New York" width="400" height="300">
+        <a href="javascript:new_window('san_pedro.html')" aling="up"><p><strong>San Pedro</strong></p></a>
+        
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="imagen/garcia.jpg" alt="San Francisco" width="400" height="300">
+        <a href="javascript:new_window('garcia.html')" aling="up"><p><strong>Garcia</strong></p></a>
+        
+      </div>
+    </div>
+    <br><br>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="imagen/catarina.jpg" alt="San Francisco" width="400" height="300">
+        <a href="javascript:new_window('santa_catarina.html')" aling="up"><p><strong>Santa Catarina</strong></p></a>
+       
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="imagen/santiago.jpg" alt="San Francisco" width="400" height="300">
+        <a href="javascript:new_window('santiago.html')" aling="up"><p><strong>Santiago</strong></p></a>
+        
+      </div>
+    </div>
+    
+
+
+
+
+  </div>
+</div>
+
+</body>
+</html>

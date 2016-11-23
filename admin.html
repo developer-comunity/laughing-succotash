@@ -1,0 +1,380 @@
+<?php 
+require_once 'session_valid.php';
+require_once 'datos.php';
+?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="" href="bootstrap/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="" href="bootstrap/css/buttons.dataTables.min.css">
+  <script src="bootstrap/js/jquery.js"></script>
+  <script type="text/javascript" src="bootstrap/js/jquery.dataTables.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  
+
+  <script src="bootstrap/js/dataTables.buttons.min.js"></script>
+  <script src="bootstrap/js/buttons.print.min.js"></script>
+
+
+
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
+ 
+  <!--Carousel -->
+  <style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+  </style>
+  <script type="text/javascript">
+ $(document).ready(function(){
+ $('#example').dataTable({
+ "ajax": "datos.php",
+ "columns":[
+ { "data": "hacer"},
+ { "data": "NomEven"},
+ { "data": "TipoEven"},
+ { "data": "LugarEven"},
+ { "data": "FechaEven"},
+ { "data": "HoraEven"},
+ { "data": "DescriEven"}
+
+ ],
+
+"dom": '<"DTTT btn-group" B><"dataTables_wrapper form-inline dt-bootstrap" lfrtip>',
+"buttons":
+[
+{
+"extend": 'print',
+
+"text": 'Imprimir',
+"pageSize":'LEGAL',
+"download":'open',
+            "exportOptions":{
+              "columns": ':visible'
+            }
+      },
+      
+],
+
+
+
+
+ });
+ });
+ function mostrar(){
+
+$('#mGuardar').modal('toggle');
+  $('#mGuardar').modal('show');
+
+ }
+
+function modificar(IdEven, NomEven, TipoEven, LugarEven, FechaEven, HoraEven, DescriEven){
+$(mid).val(IdEven);
+$(mNomEven).val(NomEven);
+$(mTipoEven).val(TipoEven);
+$(mLugarEven).val(LugarEven);
+$(mFechaEven).val(FechaEven);
+$(mHoraEven).val(HoraEven);
+$(mDescriEven).val(DescriEven);
+$('#mModificar').modal('toggle');
+  $('#mModificar').modal('show');
+
+ }
+
+
+ function guardar(){
+    var NomEven= $('#NomEven').val();
+    var TipoEven= $('#TipoEven').val();
+    var LugarEven= $('#LugarEven').val();
+    var FechaEven= $('#FechaEven').val();
+    var HoraEven= $('#HoraEven').val();
+    var DescriEven= $('#DescriEven').val();
+    alert(NomEven+TipoEven+LugarEven+FechaEven+HoraEven+DescriEven);
+    $.post("save_evento.php",
+    {NomEven:NomEven, TipoEven:TipoEven, LugarEven:LugarEven, FechaEven:FechaEven, HoraEven:HoraEven, DescriEven:DescriEven},
+    function(data){
+      $("#reporte").html(data);
+       
+    $("#NomEven").val("");
+    $("#TipoEven").val("");
+    $("#LugarEven").val("");
+    $("#FechaEven").val("");
+    $("#HoraEven").val("");
+   $("#DescriEven").val("");
+    $("#mGuardar").modal('toggle');
+    });
+  }
+
+
+function eliminar(eli){
+  $(tid).val(eli)
+  $('#mymodal').modal('toggle');
+  $('#mymodal').modal('show');
+
+ }
+
+
+</script>
+
+ <style type="text/css">
+body{
+  background-color: #7FFFD4;
+}
+</style>
+
+  
+
+
+
+
+
+
+
+
+  
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      
+    </div>
+    <ul class="nav navbar-nav">
+      
+      </li>
+      <li><a href="#">Crear Eventos</a></li>
+      <li><a href="cupones.html">Crear Cupones</a></li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+       
+      
+
+       <li class="dropdown">
+          <a href="#" class="glyphicon glyphicon-cog dropdown-toggle" data-toggle="dropdown"><b></b> <span class="caret"></span></a>
+      <ul id="login-dp" class="dropdown-menu">
+        <li>
+           <div class="row">
+              <div class="col-md-12">
+               
+                             
+       <form class="form" role="form" method="post" accept-charset="UTF-8" id="login-nav">
+                    
+                    <div class="form-group">
+                       <a href="salir.php" class="btn btn-default btn-block">Cerrar Sesion</a>
+                    </div>
+                    <div class="checkbox">
+                       
+                    </div>
+                 </form>     </div>
+              <div class="bottom text-center">
+               
+              </div>
+           </div>
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+    </ul>
+
+  </div>
+      
+    
+        
+        
+        
+</nav>
+<div class="container">
+  <br>
+<table id="example" class="display" cellspacing="0" widht="100%">
+  <thead>
+    <tr>
+      <th><a title="Agregar" href="#" onclick="mostrar()"><i class="glyphincon glyphicon-plus"></i></a></th>
+
+      
+
+      <th>Evento</th>
+      <th>Tipo</th>
+      <th>Lugar</th>
+      <th>Fecha</th>
+      <th>Hora</th>
+      <th>Descripcion</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+
+<!-- Modal eliminar -->
+  <div id="mymodal" class="modal fade" role="dialog">
+    <div cass="modal-dialog">
+    <!--Modal Content-->
+     <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">¿Deseas Continuar?</h4>
+      </div>
+      <div class="modal-body">
+        <p>Esta apunto de eliminar un evento</p>
+        <form action="del_evento.php" method="post" class="form-horizontal">
+          <div class="form-group">
+              <input id="tid" name="tid" type="hidden"/>
+          </div>
+          <div class="modal-footer">
+          <input type="submit" value="Continuar" name="eliminar" class="btn btn-success"/>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          </div>    
+        </form>
+      </div>
+    </div>
+    </div>
+  </div>  
+  <!--Modal Eliminar--> 
+
+<!-- Modal Modificar eliminar -->
+  <div id="mModificar" class="modal fade" role="dialog">
+    <div cass="modal-dialog">
+    <!--Modal Content-->
+     <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modificar evento</h4>
+      </div>
+      <div class="modal-body">
+        
+       <form action="mod_evento.php" method="POST" name="evento">
+              <div class="form-group">
+                <input type="hidden" name="mid" id="mid">
+                <label for="Nombre">Nombre:</label>
+                <input type="text" id="mNomEven" name="mNomEven" class="form-control" placeholder="Nombre del evento" required ="autofocus"/>
+              </div>
+              <div class="form-group">
+                <label for="Tipo">Tipo:</label>
+                <input type="text" id="mTipoEven" name="mTipoEven" class="form-control" placeholder="Tipo de evento" required/>
+              </div>
+              <div class="form-group">
+                <label for="Lugar">Lugar:</label>
+                <input type="text" id="mLugarEven" name="mLugarEven" class="form-control" placeholder="Lugar del evento" required/>
+              </div>
+              <div class="form-group">
+                <label for="Fecha">Fecha:</label>
+                <input type="date" id="mFechaEven" name="mFechaEven" class="form-control" required/>
+              </div>
+              <div class="form-group">
+               <label for="Hora">Hora:</label>
+               <input type="time" id="mHoraEven" name="mHoraEven" class="form-control" required/>
+              </div>
+              <div class="form-group">
+                    <label for="Descripcion">Descripcion:</label>
+                    <textarea type="text" id="mDescriEven" name="mDescriEven" class="form-control" placeholder="Descripcion del evento" required></textarea>
+              </div>
+              <div class="form-group">
+                          <button class='btn btn-success' onclick="" id="btnguardar">Guardar</button>
+              </div>
+            </form>
+      </div>
+    </div>
+    </div>
+  </div>  
+  <!--Modal Eliminar--> 
+
+         
+           
+<!-- Modal activar-->
+  <div id="mGuardar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+       <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Evento</h4>
+          </div>
+          <div class="modal-body">
+                                                         
+            <form action="" method="POST" name="evento">
+              <div class="form-group">
+                <label for="Nombre">Nombre:</label>
+                <input type="text" id="NomEven" name="NomEven" class="form-control" placeholder="Nombre del evento" required ="autofocus"/>
+              </div>
+              <div class="form-group">
+                <label for="Tipo">Tipo:</label>
+                <input type="text" id="TipoEven" name="TipoEven" class="form-control" placeholder="Tipo de evento" required/>
+              </div>
+              <div class="form-group">
+                <label for="Lugar">Lugar:</label>
+                <input type="text" id="LugarEven" name="LugarEven" class="form-control" placeholder="Lugar del evento" required/>
+              </div>
+              <div class="form-group">
+                <label for="Fecha">Fecha:</label>
+                <input type="date" id="FechaEven" name="FechaEven" class="form-control" required/>
+              </div>
+              <div class="form-group">
+               <label for="Hora">Hora:</label>
+               <input type="time" id="HoraEven" name="HoraEven" class="form-control" required/>
+              </div>
+              <div class="form-group">
+                    <label for="Descripcion">Descripcion:</label>
+                    <textarea type="text" id="DescriEven" name="DescriEven" class="form-control" placeholder="Descripcion del evento" required></textarea>
+              </div>
+              <div class="form-group">
+                          <button class='btn btn-success' onclick="guardar()" id="btnguardar">Guardar</button>
+              </div>
+            </form>
+                  
+       </div>
+      </div>
+    </div>
+ 
+
+</body>
+</html>
+
+
+
+    
+            
